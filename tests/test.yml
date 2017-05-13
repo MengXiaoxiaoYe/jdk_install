@@ -2,7 +2,7 @@
 - hosts: "{{ TARGET_HOSTS | default('local') }}"
   vars:
     java_user: "{{ USER | default('ansible') }}"
-    java_home: /app01/oracle/jdk
+    java_home: /oracle/jdk
     java_filename: jdk-8u121-linux-x64.tar.gz
     java_version: jdk1.8.0_121
     jdk_zip_files_location: "{{ role_path }}/files/jdk-8u121-linux-x64.tar.gz"
