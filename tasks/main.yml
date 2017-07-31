@@ -1,15 +1,22 @@
 ---
 # tasks file for jdk_install
+    # Comment this play if you want to manually download the source file
+     - name: Download source JDK compressed file
+       get_url:
+         url: http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.tar.gz
+         dest: "{{ jdk_source_files_location }}"
+         headers: "oraclelicense:accept-securebackup-cookie"
+         mode: 0750
 
      - name: Creates install target directory
        file: path="{{ java_home }}" mode=775 recurse=yes state=directory
        become_user: "{{ java_user }}"
 
      - name: Copy installation files
-       copy: src="{{ jdk_zip_files_location }}" dest="{{ java_home }}"
+       copy: src="{{ jdk_source_files_location }}" dest="{{ java_home }}"
        become_user: "{{ java_user }}"
 
-# Uncompressing JDK tar.gz file
+     # Uncompressing JDK tar.gz file
      - name: Uncompress Installation files
        become_user: "{{ java_user }}"
        unarchive: src="{{ java_home }}/{{ java_filename }}" dest="{{ java_home }}" copy=no extra_opts="--strip-components=1"
@@ -18,7 +25,7 @@
        file: path="{{ java_home }}/{{ java_filename }}" state=absent
        become_user: "{{ java_user }}"
 
-# Setting JAVA_HOME and adding Java to the PATH
+     # Setting JAVA_HOME and adding Java to the PATH
 
 ###################### Add a line to a file if it does not exist, without passing regexp ####################
 
