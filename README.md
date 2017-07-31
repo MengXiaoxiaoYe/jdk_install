@@ -1,6 +1,7 @@
 # jdk_install
 
 This Ansible role installs Java JDK from a downloaded tar.gz compressed file with the installer.
+It was added a play to download the source file to be installed.
 These installers could be downloaded from the below URL or another repository you prefer:
 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 
